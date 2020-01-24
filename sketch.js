@@ -5,8 +5,41 @@ var mot_ordinateur;
 var i=150; //i: lignes (coordonées y)
 var essais;
 
-function setup() {
+function setup() { //menu du jeu
   createCanvas(520, 700);
+  background('rgb(115, 194, 251)')
+  textSize(20)
+  text('Mode classique :',50, 200)
+  text('Mode illimité :',300,200)
+  textSize(60)
+  text('MOTUS',150,70)
+  textStyle(BOLD)
+  var facile = createButton('Facile')
+  var normal= createButton('Normal')
+  var difficile =createButton('Difficile')
+  facile.position(75, 220)
+  normal.position(75, 300)
+  difficile.position(75,380)
+  facile.mousePressed(interface_facile)
+  normal.mousePressed(interface_normale)
+  difficile.mousePressed(interface_difficile)
+  facile.size(100,50)
+  normal.size(100,50)
+  difficile.size(100,50)
+  facile.style('background-color',color(46, 201, 122))
+  normal.style('background-color',color(236, 170, 0))
+  difficile.style('background-color', color(236, 0, 0))
+  var mode_illlimité = createButton('Mode illimité')
+  mode_illlimité.position(315, 300)
+  mode_illlimité.mousePressed(interface_illimité)
+  mode_illlimité.size(100,50)
+  mode_illlimité.style('background-color',color(236, 170, 0))
+
+}
+ 
+function interface_facile(){}
+
+function interface_normale(){
   background('rgb(115, 194, 251)');
   rect(50,150,400,350);
   // fond blanc de la grille
@@ -42,7 +75,7 @@ function setup() {
   text('⚠ Attention le mot choisit doit être de 8 lettres ⚠',85,550);
   var valider=createButton('OK');
   valider.position(365,100);
-  valider.mousePressed(commencer);
+  valider.mousePressed(commencer_normal);
   mot_ordinateur=random(tab_A);
   //selectionne aléatoirement un mot du tableau A qui va ensuite s'afficher dans la grille
   textSize(20);
@@ -62,7 +95,7 @@ function setup() {
   line(120,622,175,622);
 }
 
-function commencer(){
+function commencer_normal(){
 //fonction prenant en compte le mot choisit et validé par le joueur  
   mot_joueur= mot.value();
   print (mot_joueur);
@@ -79,10 +112,13 @@ function commencer(){
   
     for(essais=0; essais<=8; essais=essais+1){ 
   // quand un essai est fait, passer à la ligne suivante de la grille
-  mot_ordinateur=text(/*'' mot de l'ordinateur dans la grille*/ 50, i+50)
+  mot_ordinateur=text(/*mot i-50*/ 50, i+50)
   }
   if(essais==8){
+    //quand les 7 essais sont réalisés affiche une alerte pour donner le mot
   alert('Le mot était: ' , mot_ordinateur)
   }
-
 }
+
+function interface_difficile(){}
+function interface_illimité(){}
