@@ -3,7 +3,7 @@ var mot;
 var mot_joueur; 
 var mot_ordinateur;
 var i=150; //i: lignes (coordonées y)
-var essais;
+var compteur_essais = 0; // compteur permettant de changer de ligne
 
 function setup() { //menu du jeu
   createCanvas(520, 700);
@@ -42,29 +42,19 @@ function interface_facile(){}
 function interface_normale(){
   background('rgb(115, 194, 251)');
   rect(50,150,400,350);
-  // fond blanc de la grille
-  line(50, 150, 450, 150);
-  line(50, 200, 450, 200);
-  line(50, 250, 450, 250);
-  line(50, 300, 450, 300);
-  line(50, 350, 450, 350);
-  line(50, 400, 450, 400);
-  line(50, 450, 450, 450);
-  line(50, 500, 450, 500);
-    // lignes horizontales
-  line(50, 150, 50, 500);
-  line(100, 150, 100, 500);
-  line(150, 150, 150, 500);
-  line(200, 150, 200, 500);
-  line(250, 150, 250, 500);
-  line(300, 150, 300, 500);
-  line(350, 150, 350, 500);
-  line(400, 150, 400, 500);
-  line(450, 150, 450, 500);
-  // lignes verticales
-  //créaction de la grille de 8 colones et 7 lignes + d'un fond blanc derrière la grille
+ // fond blanc de la grille
+  for(var h = 50; h<400; h= h+50){
+    //h est le nombre qui sépare les lignes horizontales
+    line(50, 150 +h ,450, 150+h);
+  }
+  for (var v = 50; v<450; v= v+50){
+  //v est le nombre qui sépare les lignes verticales
+    line(50 +v , 150, 50 +v, 500);
+  }
+    //créaction de la grille de 8 colones et 7 lignes (carré 50*50) + d'un fond blanc derrière la grille
+  
  var tab_A = ['accoudez', 'aggraver','alléluia','baladeur','bestiole','boulange','cacaoyer','catcheur','costumes','descente','délégués','dînettes','embossés','exclamez','évoquant','farfadet','foreuses','féodales','galloise','goupille','gêneuses','handball','humecter','héroïque','immature','inhumain','ivrognes','jaugeait','jonchant','jurerons','kakatoès','klaxonna','kérosène','lamproie','listings','lézardes','malaxeur','mensuels','méprisée','naviguât','novation','névrosés','obsèques','oncogène','oxygéner','paladins','pivotant','pénibles','quarrant','quignons','quêteurs','racismes','renfoncé','révision','salariat','soutenez','sûrement','tamiseur','toperons','tôleries','ulcèrent','uranisme','usurpées','vaisseau','violines','vétérans','wagonnée','wallonne','witloofs','xanthine','ximénies','xylidine','yachtman','yttriums','yearling','zieutais','zoologie','zozotait'] ;
-  mot=createInput() ;
+  mot=createInput();
   //variable disponible dans toutes les fonctions
   mot.position(150,100);
   mot.size(200);
@@ -78,6 +68,15 @@ function interface_normale(){
   valider.mousePressed(commencer_normal);
   mot_ordinateur=random(tab_A);
   //selectionne aléatoirement un mot du tableau A qui va ensuite s'afficher dans la grille
+   mot_ordinateur.toUpperCase()
+  premierCaractere = mot_ordinateur.charAt(0).toUpperCase()
+    textSize(20)
+  text(premierCaractere, 68,180)
+// la première lettre du mot de l'ordinateur est inscrite dans la première case de la grille
+  
+
+  
+  
   textSize(20);
   text('Lettres en            : sont dans le mot et bien placées', 30,600);
   fill(0, 160, 0);
@@ -95,6 +94,7 @@ function interface_normale(){
   line(120,622,175,622);
 }
 
+
 function commencer_normal(){
 //fonction prenant en compte le mot choisit et validé par le joueur  
   mot_joueur= mot.value();
@@ -104,21 +104,43 @@ function commencer_normal(){
     mot.value('');
   alert('Veuillez entrer un mot de 8 lettres');
   }
+  else{
+    
   
-  if(mot_joueur /*comporte un caractère interdit*/){
+    if(mot_joueur == '' /*comporte un caractère interdit*/){
   mot.value('')
     alert('Veuillez ne pas entrer des caractères autres que des lettres')
   }
   
-    for(essais=0; essais<=8; essais=essais+1){ 
-  // quand un essai est fait, passer à la ligne suivante de la grille
-  mot_ordinateur=text(/*mot i-50*/ 50, i+50)
-  }
-  if(essais==8){
+
+  if(compteur_essais==7){
     //quand les 7 essais sont réalisés affiche une alerte pour donner le mot
-  alert('Le mot était: ' , mot_ordinateur)
-  }
+   alert('Le mot était: ' , mot_ordinateur) 
+    
+  
+
+}
+  
+affichage(mot_joueur,compteur_essais)
+    compteur_essais = compteur_essais + 1 // permet de passer une ligne à chaque clic sur OK
+  }  
 }
 
 function interface_difficile(){}
 function interface_illimité(){}
+
+function affichage(mot_ordinateur,ligne){
+  
+
+
+  for(var colonne = 1 ; colonne<=7; colonne=colonne+1){ //colonne est le nombre de caractères
+  // quand un essai est fait, passer à la ligne suivante de la grille et stocker les caractères
+   text(mot_ordinateur[colonne],68 + 50*colonne, 180+ligne*50) 
+    
+    
+  }
+
+  
+  
+}
+
