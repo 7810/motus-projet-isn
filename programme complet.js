@@ -1,5 +1,4 @@
 //variables globales
-var zone_mot;
 var mot_joueur;
 var mot_ordinateur;
 var compteur_essais = 0;
@@ -37,7 +36,8 @@ function setup() { //menu du jeu
   difficile.style('background-color', color(236, 0, 0));
   mode_score= createButton('Mode score');
   mode_score.position(200, 550);
-  mode_score.mousePressed(modescore);
+  mode_score.mousePressed(interface_normale); 
+  // utilise la même interface
   mode_score.size(100,50);
   mode_score.style('background-color', color(110, 11, 20));
 }
@@ -65,8 +65,7 @@ function interface_normale(){
     //création de la grille de 8 colones et 7 lignes (carré 50*50) + d'un fond blanc derrière la grille
   
  var tab_A = ['accoudez', 'aggraver','alleluia','baladeur','bestiole','boulange','cacaoyer','catcheur','costumes','descente','delegues','dinettes','embosses','exclamez','evoquant','farfadet','foreuses','feodales','galloise','goupille','geneuses','handball','humecter','heroique','immature','inhumain','ivrognes','jaugeait','jonchant','jurerons','kakatoes','klaxonna','kerosene','lamproie','listings','lezardes','malaxeur','mensuels','meprisee','naviguat','novation','nevroses','obseques','oncogene','oxygener','paladins','pivotant','penibles','quarrant','quignons','queteurs','racismes','renfonce','revision','salariat','soutenez','surement','tamiseur','toperons','toleries','ulcerent','uranisme','usurpees','vaisseau','violines','veterans','wagonnee','wallonne','witloofs','xanthine','ximenies','xylidine','yachtman','yttriums','yearling','zieutais','zoologie','zozotait'] ;
-  zone_mot=createInput();
-  //variable disponible dans toutes les fonctions
+ var zone_mot=createInput();
   zone_mot.position(150,100);
   zone_mot.size(200);
   fill(0,0,0)
@@ -107,7 +106,9 @@ function interface_normale(){
 }
 
 function interface_difficile(){}
-function modescore(){}
+
+function modescore(){
+}
 
 function commencer(){
 //fonction prenant en compte le mot choisit et validé par le joueur  
@@ -135,9 +136,7 @@ function commencer(){
     retourmenus.size(100,50);
     retourmenus.style('background-color', color(187, 210, 225));
     }
-    /* if( retourmenus.mousePressed){
-         retourmenus.style('visibility','hidden');
-    }*/
+
     
   if(compteur_essais==7){
    //quand les 7 essais sont réalisés affiche une alerte pour donner le mot
