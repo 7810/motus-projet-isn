@@ -130,7 +130,7 @@ function commencer(){
     if(mot_joueur==mot_ordinateur){
     alert('BRAVO VOUS AVEZ TROUVE LE MOT!');
     retourmenus = createButton('Retourner au menus du jeu');
-    retourmenus.position(200, 250);
+    retourmenus.position(400, 25);
     retourmenus.mousePressed(setup);
     retourmenus.size(100,50);
     retourmenus.style('background-color', color(187, 210, 225));
